@@ -42,9 +42,9 @@ export const appRouter = router({
     demoLogin: publicProcedure
       .input(z.object({ role: z.enum(["admin", "doctor", "receptionist", "patient"]) }))
       .mutation(async ({ input, ctx }) => {
-        if (process.env.NODE_ENV === "production") {
-          throw new Error("Demo login is disabled in production.");
-        }
+        if (process.env.NODE_ENV === "production" && process.env.DEMO_LOGIN_ENABLED !== "true") {
+  throw new Error("Demo login is disabled in production.");
+}
 
         const profiles = {
           admin: { openId: "demo-admin", name: "MEDINEXUS Admin Demo", email: "admin.demo@medinexus.local" },
