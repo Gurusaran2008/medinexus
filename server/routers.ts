@@ -54,13 +54,12 @@ export const appRouter = router({
         } as const;
         const profile = profiles[input.role];
         await upsertUser({
-          openId: profile.openId,
-          name: profile.name,
-          email: profile.email,
-          loginMethod: "development-demo",
-          role: input.role,
-          lastSignedIn: new Date(),
-        });
+  openId: profile.openId,
+  name: profile.name,
+  email: profile.email,
+  loginMethod: "development-demo",
+  role: input.role,
+});
 
         const sessionToken = await sdk.createSessionToken(profile.openId, {
           name: profile.name,
