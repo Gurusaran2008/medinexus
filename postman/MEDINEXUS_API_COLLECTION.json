@@ -1,0 +1,37 @@
+{
+  "info": {
+    "name": "MEDINEXUS 2.0 API",
+    "description": "Core query and mutation examples for the hospital management demonstration.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api/trpc" }
+  ],
+  "item": [
+    {
+      "name": "Dashboard",
+      "request": { "method": "GET", "url": "{{baseUrl}}/dashboard" }
+    },
+    {
+      "name": "Patients - list",
+      "request": { "method": "GET", "url": "{{baseUrl}}/patients.list?input=%7B%22json%22%3A%7B%22search%22%3A%22Meera%22%7D%7D" }
+    },
+    {
+      "name": "Patients - create",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "content-type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"json\": {\n    \"patientCode\": \"PT-2001\",\n    \"fullName\": \"Demo Patient\",\n    \"age\": 31,\n    \"gender\": \"prefer_not_to_say\",\n    \"status\": \"active\"\n  }\n}" },
+        "url": "{{baseUrl}}/patients.create"
+      }
+    },
+    {
+      "name": "Appointments - list",
+      "request": { "method": "GET", "url": "{{baseUrl}}/appointments.list" }
+    },
+    {
+      "name": "Inventory - list",
+      "request": { "method": "GET", "url": "{{baseUrl}}/inventory.list" }
+    }
+  ]
+}

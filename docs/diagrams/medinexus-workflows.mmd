@@ -1,0 +1,26 @@
+flowchart TB
+  subgraph Architecture
+    UI[React UI] --> API[tRPC API]
+    API --> ORM[Drizzle ORM]
+    ORM --> DB[(MySQL/TiDB)]
+  end
+  subgraph CRUD
+    C[Create form] --> V[Zod validation]
+    V --> I[Insert row]
+    I --> R[Read list]
+    R --> U[Update row]
+    U --> D[Delete row]
+    D --> A[Audit log]
+  end
+  subgraph Admission
+    P[Patient] --> B{Available bed?}
+    B -->|Yes| AD[Create admission + occupy bed]
+    B -->|No| E[Return clear error]
+    AD --> DC[Discharge workflow]
+    DC --> AV[Release bed + update patient]
+  end
+  subgraph Appointment
+    S[Select doctor/time] --> CF{Conflict within 30 minutes?}
+    CF -->|No| SC[Save scheduled appointment]
+    CF -->|Yes| CE[Return conflict error]
+  end
